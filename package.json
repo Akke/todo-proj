@@ -1,0 +1,24 @@
+{
+  "name": "attgora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "mongoose": "^6.5.2",
+    "passport": "^0.6.0",
+    "passport-discord": "^0.1.4",
+    "passport-google-oauth": "^2.0.0",
+    "passport-steam": "^1.0.17",
+    "passport-twitter": "^1.0.4"
+  }
+}

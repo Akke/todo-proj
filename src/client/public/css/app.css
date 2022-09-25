@@ -1,0 +1,560 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/roboto/Roboto-Regular.ttf") format("truetype");
+}
+* {
+  box-sizing: border-box;
+  text-color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+html, body {
+  background-color: #FFF;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #2f2f2f;
+  font-family: "Roboto";
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.app {
+  width: 50%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 24px;
+  margin-top: 25%;
+}
+
+.modalOverlay {
+  background-color: rgba(0, 0, 0, 0.45);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+input[type=text], textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  background-color: rgba(84, 175, 255, 0.06);
+  width: 100%;
+  padding: 12px;
+  color: #002a4d;
+  transition: background-color 0.3s ease;
+  margin: 0 0 12px 0;
+}
+input[type=text]:focus, textarea:focus {
+  background-color: rgba(84, 175, 255, 0.12);
+}
+
+input[type=submit] {
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  background-color: rgba(84, 175, 255, 0.8);
+  font-weight: bold;
+  color: #002a4d;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: rgba(84, 175, 255, 0.9);
+}
+
+.loginContainer {
+  background-color: #FFF;
+  width: 40%;
+  border-radius: 6px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+.loginContainer .informativeDescription {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.loginContainer > h1 {
+  padding: 24px 24px 12px;
+  margin: 0;
+  font-size: 2em;
+  border-radius: 3px 3px 0 0;
+  color: #000;
+}
+.loginContainer > .buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+}
+.loginContainer > .buttons a {
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px -1px transparent, 0 2px 4px -2px transparent;
+}
+.loginContainer > .buttons a:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.12), 0 2px 4px -2px rgba(0, 0, 0, 0.12);
+}
+.loginContainer > .buttons a:last-child {
+  margin-bottom: 0;
+}
+.loginContainer > .buttons .google {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #DB4437;
+  color: #FFF;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+}
+.loginContainer > .buttons .google:hover {
+  background-color: #df584d;
+}
+.loginContainer > .buttons .google:before {
+  content: "";
+  background-image: url("../images/google-plus.png");
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+.loginContainer > .buttons .facebook {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #4267B2;
+  color: #FFF;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+}
+.loginContainer > .buttons .facebook:hover {
+  background-color: #5074be;
+}
+.loginContainer > .buttons .facebook:before {
+  content: "";
+  background-image: url("../images/facebook.png");
+  border-radius: 50%;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  filter: 0deg;
+}
+.loginContainer > .buttons .twitter {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #1DA1F2;
+  color: #FFF;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+}
+.loginContainer > .buttons .twitter:hover {
+  background-color: #35abf3;
+}
+.loginContainer > .buttons .twitter:before {
+  content: "";
+  background-image: url("../images/twitter.png");
+  border-radius: 50%;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+.loginContainer > .buttons .steam {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #171a21;
+  color: #FFF;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+}
+.loginContainer > .buttons .steam:hover {
+  background-color: #212630;
+}
+.loginContainer > .buttons .steam:before {
+  content: "";
+  background-image: url("../images/steam-logo.png");
+  border-radius: 50%;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+.loginContainer > .buttons .discord {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #5865F2;
+  color: #FFF;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+}
+.loginContainer > .buttons .discord:hover {
+  background-color: #6672f3;
+}
+.loginContainer > .buttons .discord:before {
+  content: "";
+  background-image: url("../images/discord.png");
+  border-radius: 50%;
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.boardsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.boardsContainer h1 {
+  padding: 0 24px 12px 0;
+  margin: 0;
+  font-size: 1.5em;
+  border-radius: 3px 3px 0 0;
+  color: #000;
+}
+.boardsContainer .boardsList {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin-right: auto;
+}
+.boardsContainer .boardsList .noBoards {
+  padding: 12px 0;
+  color: rgba(0, 0, 0, 0.5);
+}
+.boardsContainer .boardsList ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.boardsContainer .boardsList ul a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.1s ease;
+}
+.boardsContainer .boardsList ul a:hover {
+  color: black;
+}
+.boardsContainer .boardsList ul li {
+  padding: 10px;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  margin-bottom: 6px;
+  line-height: 1.5;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+.boardsContainer .boardsList ul li:hover {
+  background-color: #f1f7ff;
+}
+.boardsContainer .boardsList ul li.currentPage {
+  background-color: #ddecff;
+  transition: background-color 0.3s ease;
+}
+.boardsContainer .boardsList ul li.currentPage:hover {
+  background-color: #cee3ff;
+}
+.boardsContainer .boardsList ul li:last-child {
+  margin-bottom: 0;
+}
+.boardsContainer .boardsList ul li:nth-child(even) {
+  background-color: #f0f7ff;
+}
+.boardsContainer .taskList {
+  width: 70%;
+}
+.boardsContainer .taskList .noTasks {
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.boardsContainer .taskList .noTasks svg {
+  fill: rgba(0, 0, 0, 0.5);
+  height: 12em;
+  margin: 96px 0;
+}
+.boardsContainer .taskList .taskHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  margin: 0 0 48px 0;
+}
+.boardsContainer .taskList .taskHeader .taskCategories {
+  max-width: 100%;
+  width: 100%;
+  margin: 24px 0;
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  max-width: 100%;
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul a {
+  text-decoration: none;
+  color: inherit;
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul li {
+  padding: 12px;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+  margin: 0 6px 0 0;
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul li:last-child {
+  margin: 0;
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul li:hover {
+  background-color: rgba(84, 175, 255, 0.06);
+}
+.boardsContainer .taskList .taskHeader .taskCategories ul li.selected {
+  background-color: #ddecff;
+}
+.boardsContainer .taskList .taskHeader .createTask {
+  background-color: #121212;
+  color: #FFF;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 6px;
+  margin-left: auto;
+  display: flex;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.boardsContainer .taskList .taskHeader .createTask:hover {
+  background-color: #242424;
+}
+.boardsContainer .taskList .taskHeader .createTask .plus {
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+  fill: white;
+  margin: 3px 12px 0 0;
+  pointer-events: none;
+}
+.boardsContainer .taskList ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.boardsContainer .taskList ul li.task {
+  padding: 10px;
+  display: flex;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  animation: fade-in 0.3s both, fade-out 0.3s both;
+}
+.boardsContainer .taskList ul li.task:last-child {
+  margin-bottom: 0;
+}
+.boardsContainer .taskList ul li.task:nth-child(even) {
+  background-color: #f0f7ff;
+}
+.boardsContainer .taskList ul li.task .colorSorting {
+  height: 24px;
+  width: 12px;
+  border-radius: 6px;
+  justify-content: center;
+  margin-right: 6px;
+  cursor: pointer;
+}
+.boardsContainer .taskList ul li.task .taskComplete {
+  background-color: transparent;
+  border: 2px solid #262626;
+  border-radius: 50%;
+  height: 23px;
+  width: 23px;
+  margin-right: 12px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.boardsContainer .taskList ul li.task .taskComplete:hover {
+  background-color: #262626;
+}
+.boardsContainer .taskList ul li.task .taskSort {
+  background-image: url("../images/bars-solid.svg");
+  background-repeat: no-repeat;
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+  margin-left: auto;
+  display: none;
+}
+
+.createTaskModal, .updateTaskColorModal {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  width: 25%;
+  background-color: #FFF;
+  z-index: 3;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.createTaskModal .modalHeader, .updateTaskColorModal .modalHeader {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.createTaskModal .modalHeader .closeModal, .updateTaskColorModal .modalHeader .closeModal {
+  background-image: url("../images/xmark-solid.svg");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.createTaskModal h1, .updateTaskColorModal h1 {
+  font-size: 1.25em;
+  padding: 0;
+  margin: 0 auto 12px 0;
+  color: #000;
+}
+.createTaskModal form, .updateTaskColorModal form {
+  display: flex;
+  flex-direction: column;
+}
+.createTaskModal form .taskName, .updateTaskColorModal form .taskName {
+  min-height: 100px;
+}
+.createTaskModal form .taskFormOptions, .updateTaskColorModal form .taskFormOptions {
+  display: flex;
+  flex-direction: row;
+}
+.createTaskModal form .taskFormOptions input:last-child, .updateTaskColorModal form .taskFormOptions input:last-child {
+  margin-left: auto;
+}
+
+.multiSelect {
+  position: relative;
+  width: 100%;
+  margin-right: 12px;
+}
+.multiSelect:last-child {
+  margin-right: 0;
+}
+.multiSelect .multiSelectOptions {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 44px;
+  left: 0;
+  background-color: #FFF;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: scroll;
+}
+.multiSelect .multiSelectOptions .option {
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.multiSelect .multiSelectOptions .option:hover {
+  background-color: rgba(84, 175, 255, 0.06);
+}
+.multiSelect .multiSelectOptions .option:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.multiSelect .multiSelectOptions .option:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+.boardsHeader {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  width: 100%;
+  margin-bottom: 48px;
+  display: flex;
+}
+.boardsHeader .logout {
+  margin-left: auto;
+}
+.boardsHeader .logout a {
+  text-decoration: none;
+  margin: -12px 0;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  background-color: rgba(84, 175, 255, 0.8);
+  font-weight: bold;
+  color: #002a4d;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.boardsHeader .logout a:hover {
+  background-color: rgba(84, 175, 255, 0.9);
+}
+
+/*# sourceMappingURL=app.css.map */

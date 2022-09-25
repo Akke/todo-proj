@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo — Boards</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="author" content="SitePoint">
+
+    <meta property="og:title" content="A Basic HTML5 Template">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+    <meta property="og:description" content="A simple HTML5 Template for new projects.">
+    <meta property="og:image" content="image.png">
+
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="../../css/app.css">
+    <script type="text/javascript" src="../../js/events.js"></script>
+    <script type="text/javascript" src="../../js/tasks.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="modalOverlay"></div>
+        <div class="createTaskModal">
+            <div class="modalHeader">
+                <div class="closeModal closeCreateTaskModal"></div>
+            
+                <h1>Create Task</h1>
+            </div>
+
+            <form method="post" action="#" id="boardForm">
+                <textarea type="text" name="name" class="taskName" placeholder="Remember to bring potatoes from the shop..."></textarea>
+                <div class="taskFormOptions">
+                    <div class="multiSelect">
+                        <input type="text" name="board" placeholder="Board" class="multiSelectTrigger" />
+
+                        <div class="multiSelectOptions">
+                            <% boards.forEach(function(board) { %>
+                            <div class="option"><%= board %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="multiSelect">
+                        <input type="text" name="category" placeholder="Category" class="multiSelectTrigger" />
+
+                        <div class="multiSelectOptions">
+                            <% unsortedCategories.forEach(function(category) { %>
+                            <div class="option"><%= category %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <input type="submit" name="submit" value="Save" id="submitCreateTask" />
+            </form>
+        </div>
+
+        <div class="updateTaskColorModal">
+            <div class="modalHeader">
+                <div class="closeModal closeUpdateTaskColorModal"></div>
+            
+                <h1>Update Color Priority</h1>
+            </div>
+
+            <form method="post" action="#" id="updateColorForm">
+                <div class="taskFormOptions">
+                    <input type="text" name="color" placeholder="HEX color code" />
+                </div>
+
+                <input type="submit" name="submit" value="Save" id="updateTaskColor" />
+            </form>
+        </div>
+
+        <div class="boardsHeader">
+            <span>Welcome, <b><%= user.displayName %></b>!</span>
+            <span class="logout"><a href="/logout">Logout</a></span>
+        </div>
+
+        <div class="boardsContainer">
+            <div class="boardsList">
+                <h1>Boards</h1>
+                <% if(boards == "") { %>
+                <div class="noBoards">You have no boards yet. Create a task to set up a board.</div>
+                <% } %>
+
+                <ul>
+                    <% boards.forEach(function(board) { %>
+                    <a href="/tasks/<%= board %>">
+                        <li class="board <% if (boardName == board) { %>currentPage<% } %>">
+                            <strong><%= board %></strong>
+                        </li>
+                    </a>
+                    <% }); %>
+                </ul>
+            </div>
+
+            <div class="taskList">
+                <div class="taskHeader">
+                    <% if (boardName != "") { %>
+                    <div class="taskCategories">
+                        <ul>
+                            <% categories.forEach(function(category) { %>
+                            <a href="/tasks/<%= boardName %>/<%= category %>">
+                                <li class="<% if (categoryName == category) { %>selected<% } %>">
+                                    <strong><%= category %></strong>
+                                </li>
+                            </a>
+                            <% }); %>
+                        </ul>
+                    </div>
+                     <% } %>
+
+                    <div class="createTask">
+                        <svg class="plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+
+                        New Task
+                    </div>
+                </div>
+
+                <ul class="tasks">
+                    <% tasks.forEach(function(task) { %>
+                    <li class="task" data-id="<%= task._id %>">
+                        <div class="colorSorting" data-task-color-id="<%= task._id %>" style="background-color: #<%= task.color %>"></div>
+                        <div class="taskComplete"></div>
+                        <strong><%= task.title %></strong>
+                        <div class="taskSort"></div>
+                    </li>
+                    <% }); %>
+                </ul>
+
+                <% if(tasks == "") { %>
+                <div class="noTasks">
+                    <span>This is where your organised tasks would show up, if you had any...</span>
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M184.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L39 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L39 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM256 96c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H288c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H288c-17.7 0-32-14.3-32-32zM192 416c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zM80 464c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z"/></svg>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
